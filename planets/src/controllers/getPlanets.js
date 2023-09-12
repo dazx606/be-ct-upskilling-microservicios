@@ -1,8 +1,7 @@
-const characters = require("../data/index");
+const planets = require("../data");
+const { response } = require('../utils')
 
-module.exports = (req, res) => {
-    res.status(200).json({
-        status: 200,
-        data: characters.allPlanets()
-    })
+module.exports = async (req, res) => {
+    const allPlanets = await planets.allPlanets()
+    response(res, 200, allPlanets)
 }
