@@ -3,8 +3,8 @@ const controllers = require("../controllers/index")
 const router = Router();
 const middlewares = require('../middlewares')
 
-router.get("/", controllers.getPlanets);
-router.post("/", middlewares.planteValidation, controllers.postPlanets);
+router.get("/planets", controllers.getPlanets);
+router.post("/planets", middlewares.planteValidation, controllers.postPlanets);
 
 
 module.exports = router;
