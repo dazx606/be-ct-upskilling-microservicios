@@ -20,6 +20,12 @@ app.use('/planets', createProxyMiddleware({
     changeOrigin: true
 }))
 
+app.use('*', (req, res) => {
+    res.status(404).json({
+        message: 'Not found'
+    })
+})
+
 app.listen(8000, () => {
     console.log("gateway on port 8000")
 })

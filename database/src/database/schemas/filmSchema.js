@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose');
+const { ClientErrors } = require('../../utils/errors')
 
 const filmSchema = new Schema({
     "_id": String,
@@ -24,7 +25,11 @@ filmSchema.statics.get = async function (id) {
 }
 
 filmSchema.statics.insert = async function (film) {
-    return await this.create(film)
+    try {
+        return await this.create(film)
+    } catch (error) {
+        throw new ClientErrors('Error al crear la pelicula', 400)
+    }
 }
 
 module.exports = filmSchema;

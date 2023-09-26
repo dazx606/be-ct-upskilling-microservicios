@@ -6,6 +6,7 @@ const middlewares = require('../middlewares')
 
 router.get("/characters", controllers.getCharacters);
 router.post("/characters", middlewares.characterValidation, controllers.postCharacter);
+router.get('/characters/:id', controllers.getCharcterById);
 
 
 

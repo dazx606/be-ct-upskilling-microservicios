@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose');
+const { ClientErrors } = require('../../utils/errors')
 
 const planetSchema = new Schema({
     "_id": String,
@@ -27,7 +28,11 @@ planetSchema.statics.get = async function (id) {
 }
 
 planetSchema.statics.insert = async function (planet) {
-    return await this.create(planet)
+    try {
+        return await this.create(planet)
+    } catch (error) {
+        throw new ClientErrors('Error al crear el planeta', 400)
+    }
 }
 
 module.exports = planetSchema;

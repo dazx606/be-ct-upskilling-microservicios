@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose');
+const { ClientErrors } = require('../../utils/errors')
 
 const characterSchema = new Schema({
     "_id": String,
@@ -23,11 +24,15 @@ characterSchema.statics.list = async function () {
 characterSchema.statics.get = async function (id) {
     return await this.findById(id)
         .populate('homeworld', ['_id', 'name'])
-        .populate('films', ['_id', 'title'])   
+        .populate('films', ['_id', 'title'])
 }
 
 characterSchema.statics.insert = async function (character) {
-    return await this.create(character)
+    try {
+        return await this.create(character)
+    } catch (error) {
+        throw new ClientErrors('Error al crear el personaje', 400)
+    }
 }
 
 module.exports = characterSchema;

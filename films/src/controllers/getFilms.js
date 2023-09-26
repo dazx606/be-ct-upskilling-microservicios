@@ -1,13 +1,8 @@
-const films = require("../data/index");
+const axios = require("axios");
 const { response } = require('../utils')
 
 module.exports = async (req, res) => {
 
-const allFilms = await films.allFilms()
-response(res, 200, allFilms)
-
-    // res.status(200).json({
-    //     status: 200,
-    //     data: characters.allFilms()
-    // })
+    const allFilms = await axios.get("http://database:8004/Film")
+    response(res, 200, allFilms.data)
 }
